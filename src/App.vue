@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col min-h-screen font-sans mobile:bg-[#161617] tablet:bg-[#eceef2]"
+    class="flex flex-col min-h-screen font-sans dark:bg-[#434343] bg-[#eceef2]"
   >
     <TheNavigation />
     <RouterView />
