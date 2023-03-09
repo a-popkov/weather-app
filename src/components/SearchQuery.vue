@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative flex items-center justify-end gap-3 ml-auto w-full max-w-[400px]"
+    class="relative hidden items-center justify-end gap-3 ml-auto w-full max-w-[400px] sm:flex"
   >
     <i
       class="fa-sharp fa-solid fa-magnifying-glass absolute right-4 text-gray-400"
@@ -46,6 +46,22 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const previewCity = searchResult => {
+  console.log(searchResult)
+  const [city, state] = searchResult.place_name.split(',')
+  router.push({
+    name: 'cityView',
+    params: { state: state.replaceAll(' ', ''), city: city },
+    query: {
+      lat: searchResult.geometry.coordinates[1],
+      lng: searchResult.geometry.coordinates[0],
+      preview: true
+    }
+  })
+}
 
 const mapboxAPIKey =
   'pk.eyJ1Ijoiam9obmtvbWFybmlja2kiLCJhIjoiY2t5NjFzODZvMHJkaDJ1bWx6OGVieGxreSJ9.IpojdT3U3NENknF6_WhR2Q'

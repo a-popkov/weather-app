@@ -8,7 +8,8 @@ module.exports = {
       tablet: { min: '768px' },
       laptop: { min: '1024px' },
       sm: '640px',
-      md: '768px'
+      md: '768px',
+      lg: '1024px'
     },
     extend: {
       fontFamily: {
@@ -26,7 +27,7 @@ module.exports = {
       }
     },
     container: {
-      padding: '2rem',
+      padding: '1rem',
       center: true
     }
   },
