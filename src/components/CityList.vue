@@ -5,7 +5,7 @@
 
   <p
     v-if="savedCities.length === 0"
-    class="text-[10px] sm:text-[12px] text-black dark:text-[#dedede]/50 leading-3"
+    class="flex justify-center px-4 pt-1 text-[10px] sm:text-[12px] text-black dark:text-[#dedede]/50 leading-3"
   >
     Нет добавленных локаций. Чтобы начать отслеживать местоположение, выполните
     поиск в&nbsp;поле выше.
@@ -31,6 +31,10 @@ const getCities = async () => {
       )
     })
     const weatherData = await Promise.all(requests)
+
+    // Задержка загрузки
+    await new Promise(res => setTimeout(res, 1000))
+
     weatherData.forEach((value, index) => {
       savedCities.value[index].weather = value.data
     })
@@ -43,6 +47,7 @@ const goToCityView = city => {
     name: 'cityView',
     params: { state: city.state, city: city.city },
     query: {
+      id: city.id,
       lat: city.coords.lat,
       lng: city.coords.lng
     }

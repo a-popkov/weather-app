@@ -10,6 +10,21 @@
   </div>
 
   <div
+    class="container flex items-center justify-center gap-5 rounded sm:rounded-xl my-4 bg-white dark:bg-[#161617]"
+  >
+    <CityAddButton />
+
+    <!-- Удалить город -->
+    <div
+      @click="removeCity"
+      class="flex items-center gap-2 py-2 text-black text-sm dark:text-white cursor-pointer duration-150 hover:text-[#d00] dark:hover:text-[#fc3f1d]"
+    >
+      <i class="fa-regular fa-trash-can"></i>
+      <p class="hidden sm:inline-flex">Удалить город</p>
+    </div>
+  </div>
+
+  <div
     class="container flex flex-col items-center justify-center rounded sm:rounded-xl my-4 bg-white dark:bg-[#161617]"
   >
     <!-- Обзор погоды -->
@@ -138,7 +153,8 @@
 
 <script setup>
 import axios from 'axios'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import CityAddButton from './CityAddButton.vue'
 const route = useRoute()
 const getWeatherData = async () => {
   try {
@@ -154,10 +170,24 @@ const getWeatherData = async () => {
       const utc = hour.dt * 1000 + localOffset
       hour.currentTime = utc + 1000 * weatherData.data.timezone_offset
     })
+
+    // Задержка загрузки
+    await new Promise(res => setTimeout(res, 1000))
+
     return weatherData.data
   } catch (err) {
     console.log(err)
   }
 }
 const weatherData = await getWeatherData()
+
+const router = useRouter()
+const removeCity = () => {
+  const cities = JSON.parse(localStorage.getItem('savedCities'))
+  const updatedCities = cities.filter(city => city.id !== route.query.id)
+  localStorage.setItem('savedCities', JSON.stringify(updatedCities))
+  router.push({
+    name: 'home'
+  })
+}
 </script>

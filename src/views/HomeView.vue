@@ -4,7 +4,7 @@
       <Suspense>
         <CityList />
         <template #fallback>
-          <p>Загрузка...</p>
+          <CityCardSkeleton />
         </template>
       </Suspense>
     </div>
@@ -12,5 +12,6 @@
 </template>
 
 <script setup>
+import CityCardSkeleton from '../components/CityCardSkeleton.vue'
 import CityList from '../components/CityList.vue'
 </script>
