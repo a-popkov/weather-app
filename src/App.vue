@@ -11,5 +11,3 @@
 import { RouterView } from 'vue-router'
 import TheNavigation from './components/TheNavigation.vue'
 </script>
-
-<style lang="scss" scoped></style>

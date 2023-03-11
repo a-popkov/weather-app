@@ -13,15 +13,7 @@
     class="container flex items-center justify-center gap-5 rounded sm:rounded-xl my-4 bg-white dark:bg-[#161617]"
   >
     <CityAddButton />
-
-    <!-- Удалить город -->
-    <div
-      @click="removeCity"
-      class="flex items-center gap-2 py-2 text-black text-sm dark:text-white cursor-pointer duration-150 hover:text-[#d00] dark:hover:text-[#fc3f1d]"
-    >
-      <i class="fa-regular fa-trash-can"></i>
-      <p class="hidden sm:inline-flex">Удалить город</p>
-    </div>
+    <CityRemoveButton />
   </div>
 
   <div
@@ -78,7 +70,9 @@
     <!-- Погода по часам -->
     <div class="py-12 w-full max-w-screen-md">
       <div class="mx-4 sm:mx-8 text-black dark:text-white">
-        <div class="flex gap-10 overflow-x-scroll pb-4">
+        <div
+          class="flex gap-10 overflow-x-scroll pb-4 cursor-pointer custom-scrollbar custom-scrollbar-thumb"
+        >
           <div
             v-for="hourData in weatherData.hourly"
             :key="hourData.dt"
@@ -117,7 +111,7 @@
         <h2 class="mb-1 sm:text-[24px] font-bold">Прогноз на 7 дней</h2>
         <!-- Дни недели -->
         <div
-          class="flex flex-col sm:flex-row sm:gap-10 sm:overflow-x-scroll pb-4"
+          class="flex flex-col sm:flex-row sm:gap-10 sm:overflow-x-scroll pb-4 cursor-pointer custom-scrollbar custom-scrollbar-thumb"
         >
           <div
             v-for="day in weatherData.daily"
@@ -141,8 +135,8 @@
             />
             <!-- Высокая и низкая температура -->
             <div class="flex gap-2 flex-1 justify-end sm:flex-col">
-              <p>H: {{ Math.round(day.temp.max) }}</p>
-              <p>L: {{ Math.round(day.temp.min) }}</p>
+              <p>Д: {{ Math.round(day.temp.max) }}</p>
+              <p>Н: {{ Math.round(day.temp.min) }}</p>
             </div>
           </div>
         </div>
@@ -153,13 +147,14 @@
 
 <script setup>
 import axios from 'axios'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import CityAddButton from './CityAddButton.vue'
+import CityRemoveButton from './CityRemoveButton.vue'
 const route = useRoute()
 const getWeatherData = async () => {
   try {
     const weatherData = await axios.get(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${route.query.lat}&lon=${route.query.lng}&exclude={part}&appid=7efa332cf48aeb9d2d391a51027f1a71&units=imperial`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${route.query.lat}&lon=${route.query.lng}&exclude={part}&appid=7efa332cf48aeb9d2d391a51027f1a71&lang=ru&units=metric`
     )
     // cal current date & time
     const localOffset = new Date().getTimezoneOffset() * 60000
@@ -180,14 +175,4 @@ const getWeatherData = async () => {
   }
 }
 const weatherData = await getWeatherData()
-
-const router = useRouter()
-const removeCity = () => {
-  const cities = JSON.parse(localStorage.getItem('savedCities'))
-  const updatedCities = cities.filter(city => city.id !== route.query.id)
-  localStorage.setItem('savedCities', JSON.stringify(updatedCities))
-  router.push({
-    name: 'home'
-  })
-}
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <main class="container text-black dark:text-white">
+  <main class="container text-black dark:text-white px-1 sm:px-4">
     <div class="flax flex-col gap-4">
       <Suspense>
         <CityList />

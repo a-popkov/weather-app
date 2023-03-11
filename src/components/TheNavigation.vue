@@ -5,8 +5,6 @@
     <nav
       class="container flex flex-row items-center gap-4 py-4 dark:text-white text-black mobile:justify-between"
     >
-      <MenuBurger />
-
       <RouterLink :to="{ name: 'home' }">
         <div
           class="flex items-center gap-3 w-[105px] h-[26px] bg-[url('/src/assets/weather.svg')] bg-[length:105px_26px] bg-no-repeat bg-left"
@@ -15,7 +13,7 @@
         </div>
       </RouterLink>
 
-      <ul class="hidden items-center justify-between gap-4 mx-6 lg:flex">
+      <!-- <ul class="hidden items-center justify-between gap-4 mx-6 lg:flex">
         <li>
           <a
             class="font-semibold text-[16px] transition-colors duration-150 hover:text-[#d00] dark:hover:text-[#fc3f1d]"
@@ -37,7 +35,7 @@
             >На карте</a
           >
         </li>
-      </ul>
+      </ul> -->
 
       <SearchQuery />
 
@@ -65,7 +63,6 @@ import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import ModalBase from './ModalBase.vue'
 import SearchQuery from './SearchQuery.vue'
-import MenuBurger from './MenuBurger.vue'
 
 const modalActive = ref(null)
 const toggleModal = () => {
