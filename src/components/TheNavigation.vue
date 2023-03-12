@@ -13,12 +13,12 @@
         </div>
       </RouterLink>
 
-      <!-- <ul class="hidden items-center justify-between gap-4 mx-6 lg:flex">
+      <ul class="hidden items-center justify-between gap-4 mx-6 lg:flex">
         <li>
           <a
             class="font-semibold text-[16px] transition-colors duration-150 hover:text-[#d00] dark:hover:text-[#fc3f1d]"
             href="#"
-            >На 10 дней</a
+            >На неделю</a
           >
         </li>
         <li>
@@ -35,7 +35,7 @@
             >На карте</a
           >
         </li>
-      </ul> -->
+      </ul>
 
       <SearchQuery />
 
