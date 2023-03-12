@@ -1,4 +1,4 @@
-# Weather project: Vue 3 + Vite + Tailwind CSS + Stylelint + Prettier
+# Weather project: Vue 3 + Vite + Tailwind CSS + Axios + Prettier
 
 ## Customize configuration
 
